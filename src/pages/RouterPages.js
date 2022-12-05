@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import { Layout, Menu } from 'antd';
 import {
   UserOutlined,
@@ -15,13 +15,16 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import { UiContext } from '../context/UiContext';
 const { Header, Sider, Content } = Layout;
 export const RouterPages = () => {
+
+    const {ocultarMenu} =useContext(UiContext)
   return (
     <Router>
     
     <Layout style={{height:'100vh'}}>
-    <Sider hidden ={false} trigger={null} collapsible collapsed={false}>
+    <Sider   breakpoint='md' collapsedWidth="0" hidden={ocultarMenu}>
       <div className="logo" />
       <Menu
         theme="dark"
@@ -67,6 +70,10 @@ export const RouterPages = () => {
         <Route path="/escritorio" element={<Escritorio />} />
         <Route path="/crearTicket" element={<CrearTicket />} />
         <Route path="/cola" element={<Cola/>} />
+        <Route
+        path="*"
+        element={ <nav><h3>Estas en una ruta desconocida, Regresar:</h3><Link to="/">QUIERO INGRESAR</Link></nav> }
+    />
       </Routes>
       </Content>
     </Layout>
