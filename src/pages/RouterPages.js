@@ -39,15 +39,10 @@ export const RouterPages = () => {
           {
             key: '2',
             icon: <VideoCameraOutlined />,
-            label: <Link to="/escritorio">Escritorio</Link>,
-          },
-          {
-            key: '3',
-            icon: <VideoCameraOutlined />,
             label: <Link to="/crearTicket">Crear Ticket</Link>,
           },
           {
-            key: '4',
+            key: '3',
             icon: <VideoCameraOutlined />,
             label: <Link to="/cola">Ver Cola</Link>,
           },

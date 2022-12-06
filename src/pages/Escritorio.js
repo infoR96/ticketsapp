@@ -1,18 +1,27 @@
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
 import { Row,Col,Typography,Button, Divider } from 'antd'
-import React from 'react'
+import React,{useState} from 'react'
+import { useHideMenu } from '../hooks/useHideMenu';
+import { getUsuarioStorage } from '../helper/getUsuarioStorage';
+import { Link, Navigate } from 'react-router-dom';
 
 
 const {Title,Text}= Typography;
 
 export const Escritorio = () => {
+  useHideMenu(false);
+  const [usuario]=useState(getUsuarioStorage());
 
   const salir =()=>{
-    console.log('salir')
+    localStorage.clear();
+    Navigate('/escritorio')
   }
   const siguienteTicket = ()=>{
     console.log('siguiente')
 
+  }
+  if(!usuario.agente || !usuario.escritorio){
+    Navigate('/escritorio')
   }
   return (
     <>
