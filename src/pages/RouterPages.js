@@ -61,7 +61,7 @@ export const RouterPages = () => {
         }}
       >
        <Routes>
-        <Route path="/" element={<Ingresar />} />
+        <Route path="/ingresar" element={<Ingresar />} />
         <Route path="/escritorio" element={<Escritorio />} />
         <Route path="/crearTicket" element={<CrearTicket />} />
         <Route path="/cola" element={<Cola/>} />

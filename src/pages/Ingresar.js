@@ -30,7 +30,9 @@ export const Ingresar = () => {
     return <Link to='/escritorio'></Link>
   }
   return (
-    <>
+
+    <div>
+      <h1>HOLA MUNDO</h1>
     <Title level={2}>Ingresar</Title>
     <Text> Ingrese su nombre y numero de Escritorio</Text>
     <Divider/>
@@ -70,6 +72,6 @@ export const Ingresar = () => {
         </Button>
       </Form.Item>
     </Form>
-    </>
+    </div>
   )
 }

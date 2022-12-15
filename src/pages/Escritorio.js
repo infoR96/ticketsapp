@@ -3,7 +3,7 @@ import { Row,Col,Typography,Button, Divider } from 'antd'
 import React,{useState} from 'react'
 import { useHideMenu } from '../hooks/useHideMenu';
 import { getUsuarioStorage } from '../helper/getUsuarioStorage';
-import { Link, Navigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 
 const {Title,Text}= Typography;
@@ -11,17 +11,19 @@ const {Title,Text}= Typography;
 export const Escritorio = () => {
   useHideMenu(false);
   const [usuario]=useState(getUsuarioStorage());
+  const Navigate = useNavigate();
 
   const salir =()=>{
     localStorage.clear();
-    Navigate('/escritorio')
+    console.log('hilla')
+    Navigate('/ingresar')
   }
   const siguienteTicket = ()=>{
     console.log('siguiente')
 
   }
   if(!usuario.agente || !usuario.escritorio){
-    Navigate('/escritorio')
+    Navigate('/ingresar')
   }
   return (
     <>
