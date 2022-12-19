@@ -29,9 +29,9 @@ export const Escritorio = () => {
     <>
     <Row>
       <Col span ={20}>
-        <Title></Title>
+        <Title level={2}>{usuario.agente}</Title>
         <Text>Usted esta trabajando en el escritorio: </Text>
-        <Text type="success">5</Text>
+        <Text type="success">{usuario.escritorio}</Text>
       </Col>
       <Col>
       <Button onClick={salir}

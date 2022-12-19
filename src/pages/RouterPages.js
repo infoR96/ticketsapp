@@ -67,7 +67,7 @@ export const RouterPages = () => {
         <Route path="/cola" element={<Cola/>} />
         <Route
         path="*"
-        element={ <nav><h3>Estas en una ruta desconocida, Regresar:</h3><Link to="/">QUIERO INGRESAR</Link></nav> }
+        element={ <nav><h3>Estas en una ruta desconocida, Regresar:</h3><Link to="/ingresar">QUIERO INGRESAR</Link></nav> }
     />
       </Routes>
       </Content>
