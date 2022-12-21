@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import {Button, Col,Row,Typography} from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import { useHideMenu } from '../hooks/useHideMenu';
+import { SocketContext } from '../context/SocketContext';
+
 
 const {Text,Title}=Typography;
 export const CrearTicket = () => {
 
   useHideMenu(true);
 
+  const {socket}= useContext(SocketContext);
+  const [ticket,setTicket]=useState({});
   const nuevoTicket = ()=>{
-    console.log('nuevo ticket')
+      socket.emit('solicitar-ticket',{"data":"mdg"},(ticket)=>{
+        setTicket(ticket);
+      });
   }
   return (
     <>
@@ -34,7 +40,7 @@ export const CrearTicket = () => {
         </Text>
         <br/>
         <Text type='success' style={{fontSize:55}} level={2}>
-            55
+            {ticket.numero}
         </Text>
       </Col>
     </Row>

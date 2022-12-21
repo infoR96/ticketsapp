@@ -1,69 +1,77 @@
 import { CloseCircleOutlined, RightOutlined } from '@ant-design/icons';
-import { Row,Col,Typography,Button, Divider } from 'antd'
-import React,{useState} from 'react'
+import { Row, Col, Typography, Button, Divider } from 'antd'
+import React, { useContext, useState } from 'react'
 import { useHideMenu } from '../hooks/useHideMenu';
 import { getUsuarioStorage } from '../helper/getUsuarioStorage';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { SocketContext } from '../context/SocketContext';
 
 
-const {Title,Text}= Typography;
+const { Title, Text } = Typography;
 
 export const Escritorio = () => {
   useHideMenu(false);
-  const [usuario]=useState(getUsuarioStorage());
+  const { socket } = useContext(SocketContext);
+  const [usuario] = useState(getUsuarioStorage());
+  const [ticket, setticket] = useState(null)
   const Navigate = useNavigate();
 
-  const salir =()=>{
+  const salir = () => {
     localStorage.clear();
-    console.log('hilla')
     Navigate('/ingresar')
   }
-  const siguienteTicket = ()=>{
-    console.log('siguiente')
+  const siguienteTicket = () => {
+    socket.emit('siguiente-ticket-pendiente', usuario, (ticket) => {
+      setticket(ticket);
+    });
 
   }
-  if(!usuario.agente || !usuario.escritorio){
+  if (!usuario.agente || !usuario.escritorio) {
     Navigate('/ingresar')
   }
   return (
     <>
-    <Row>
-      <Col span ={20}>
-        <Title level={2}>{usuario.agente}</Title>
-        <Text>Usted esta trabajando en el escritorio: </Text>
-        <Text type="success">{usuario.escritorio}</Text>
-      </Col>
-      <Col>
-      <Button onClick={salir}
-          shape="round"
-          type="danger"
-        ><CloseCircleOutlined/>
-          Salir
+      <Row>
+        <Col span={20}>
+          <Title level={2}>{usuario.agente}</Title>
+          <Text>Usted esta trabajando en el escritorio: </Text>
+          <Text type="success">{usuario.escritorio}</Text>
+        </Col>
+        <Col>
+          <Button onClick={salir}
+            shape="round"
+            type="danger"
+          ><CloseCircleOutlined />
+            Salir
 
-        </Button>
-      </Col>
-    </Row>
-    <Divider/>
-    <Row>
-      <Col>
-        <Text>Esta siendo atendido el ticket numero: </Text>
-        <Text style={{fontSize:30}}
-          type="danger">55 </Text>
-      </Col>
-    </Row>
-    <Row>
-      <Col offset={18} span={6} align="right">
-        <Button onClick={siguienteTicket}
-          shape="round"
-          type="primary"
-        >
-          <RightOutlined/>
-          Siguiente
+          </Button>
+        </Col>
+      </Row>
+      <Divider />
+      {
+        ticket && (
+        <Row>
+          <Col>
+            <Text>Esta siendo atendido el ticket numero: </Text>
+            <Text style={{ fontSize: 30 }}
+              type="danger">{ticket.numero} </Text>
+          </Col>
+        </Row>)
+      }
 
-        </Button>
+      <Row>
+        <Col offset={18} span={6} align="right">
+          <Button onClick={siguienteTicket}
+            shape="round"
+            type="primary"
+          >
+            <RightOutlined />
+            Siguiente
 
-      </Col>
-    </Row>
+          </Button>
+
+        </Col>
+      </Row>
     </>
   )
 }
