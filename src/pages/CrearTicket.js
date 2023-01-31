@@ -13,7 +13,7 @@ export const CrearTicket = () => {
   const {socket}= useContext(SocketContext);
   const [ticket,setTicket]=useState({});
   const nuevoTicket = ()=>{
-      socket.emit('solicitar-ticket',{"data":"mdg"},(ticket)=>{
+      socket.emit('solicitar-ticket',{"data":"msg"},(ticket)=>{
         setTicket(ticket);
       });
   }

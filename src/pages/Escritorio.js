@@ -38,10 +38,10 @@ export const Escritorio = () => {
           <Text type="success">{usuario.escritorio}</Text>
         </Col>
         <Col>
-          <Button onClick={salir}
+          <Button danger onClick={salir}
             shape="round"
-            type="danger"
-          ><CloseCircleOutlined />
+            type="link">
+          <CloseCircleOutlined />
             Salir
 
           </Button>
